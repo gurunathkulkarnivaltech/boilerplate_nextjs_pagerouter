@@ -1,10 +1,10 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect } from "react";
 
-import { mountStoreDevtool } from 'simple-zustand-devtools';
-import { createStore, StoreApi } from 'zustand';
-import createContext from 'zustand/context';
+import { mountStoreDevtool } from "simple-zustand-devtools";
+import { createStore, StoreApi } from "zustand";
+import createContext from "zustand/context";
 
-import { AppActions, AppState } from './interface';
+import { AppActions, AppState } from "./interface";
 
 let store: StoreApi<AppState & AppActions>;
 let serverStore: StoreApi<AppState & AppActions>;
@@ -15,13 +15,13 @@ export const Provider = zustandContext.Provider;
 export const useAppStore = zustandContext.useStore;
 
 const getDefaultServerSideState = () => ({
-  categoryData: []
+  categoryData: [],
 });
 export const initializeStore = (preloadedState = {}) => {
   serverStore = createStore<AppState & AppActions>((set: any) => ({
     ...getDefaultServerSideState(),
     ...preloadedState,
-    setCategoryData: (data) => set(() => ({ categoryData: data }))
+    setCategoryData: (data) => set(() => ({ categoryData: data })),
   }));
 
   return serverStore;
@@ -33,7 +33,7 @@ export const getAppStore = () => {
 
 export const useCreateStore = (serverInitialState = {}) => {
   // Server side code: For SSR & SSG, always use a new store.
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return () => initializeStore(serverInitialState);
   }
   // End of server side code
@@ -50,15 +50,15 @@ export const useCreateStore = (serverInitialState = {}) => {
           // re-use functions from existing store
           // but reset all other properties.
           ...serverInitialState,
-          ...store.getState()
+          ...store.getState(),
         },
-        true // replace states, rather than shallow merging
+        true, // replace states, rather than shallow merging
       );
     }
   });
   return () => store;
 };
 
-if (process.env.NODE_ENV === 'development') {
-  mountStoreDevtool('Store', initializeStore(store!));
+if (process.env.NODE_ENV === "development") {
+  mountStoreDevtool("Store", initializeStore(store!));
 }

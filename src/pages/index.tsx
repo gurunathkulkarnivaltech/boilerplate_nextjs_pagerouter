@@ -1,13 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-import { useAppStore } from '@/Store/store'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
+import { useAppStore } from "@/Store/store";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const {categoryData} = useAppStore();
+  const { categoryData } = useAppStore();
   console.log("categoryData", categoryData);
   return (
     <>
@@ -17,9 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        Hello
-      </main>
+      <main className={`${styles.main} ${inter.className}`}>Hello</main>
     </>
-  )
+  );
 }

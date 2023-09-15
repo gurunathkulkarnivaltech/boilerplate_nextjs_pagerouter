@@ -29,12 +29,12 @@ export default function MyApp({
     // }
     const data = [
       {
-        dd:""
+        dd: "",
       },
       {
-        dd:"111"
-      }
-    ]
+        dd: "111",
+      },
+    ];
     setCategoryData(data);
   };
   return (

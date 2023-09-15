@@ -1,7 +1,7 @@
 export interface AppState {
-    categoryData: any;
+  categoryData: any;
 }
 
 export interface AppActions {
-    setCategoryData: (data: any) => void;
+  setCategoryData: (data: any) => void;
 }
