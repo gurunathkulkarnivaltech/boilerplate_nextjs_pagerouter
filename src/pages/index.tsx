@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "src/styles/Home.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import ContentPage from "@/components/ContentPage";
+import axios from "axios";
+import { BrPage } from "@bloomreach/react-sdk";
 
 export default function Home() {
   return (
@@ -14,7 +15,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        hiii
+        <BrPage configuration={{
+            endpoint: 'https://developers.bloomreach.io/delivery/site/v1/channels/getting-started/pages',
+            httpClient: axios
+          }} mapping={{ ContentPage }}>
+        </BrPage>
       </main>
     </>
   );
