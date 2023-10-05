@@ -3,6 +3,8 @@ import { Provider, useCreateStore } from "@/store/store";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
+import AppHeader from "@/components/AppHeader/AppHeader";
+import Footer from "@/components/Footer/Footer";
 
 type TProps = Pick<AppProps, "Component" | "pageProps"> & {
   initialServerSideState: AppState & AppActions;
@@ -24,7 +26,9 @@ export default function MyApp({
   };
   return (
     <Provider createStore={appStore}>
+      <AppHeader />
       <Component {...pageProps} />
+      <Footer />
     </Provider>
   );
 }
