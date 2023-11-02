@@ -18,17 +18,21 @@ type Props = {
 }
 
 export const GlobalSubMenu = ({imageData, data, isDropDown} : Props) => {
+  console.log("Data", data);
+  // data.map((item: any)=> {
+  //   item.regionsItems = JSON.parse(item.regionsItems)
+  // })
   return (
     <div css={isDropDown ? submenuContainer : submenuCollapse}>
     <div css={submenuCss}>
       {data.map((item: DynamicObject, index: any) => {
         return (
           <div css={listContainer} key={index}>
-            <div css={countryCss}>{item.country}</div>
-            {item.regions.map((element: any, i: any) => {
+            <div css={countryCss}>{item.name}</div>
+            {JSON.parse(item.regionsItems).map((element: any, i: any) => {
               return (
                 <div css={regionCss} key={i}>
-                  {element}
+                  {element.value.name}
                 </div>
               );
             })}

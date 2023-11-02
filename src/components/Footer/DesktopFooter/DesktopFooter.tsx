@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function DesktopFooter({ data }: Props) {
-  console.log("Coming", data);
+  console.log("FooterComing", data);
   return (
     <div>
       <div>
@@ -21,11 +21,11 @@ export default function DesktopFooter({ data }: Props) {
           {data.map((item: DynamicObject, index: any) => {
             return (
               <div css={listContainerFooter} key={index}>
-                <div css={footerItemCss}>{item.title}</div>
-                {item.menus.map((element: any, i: any) => {
+                <div css={footerItemCss}>{item.name}</div>
+                {JSON.parse(item.menuItems).map((element: any, i: any) => {
                   return (
                     <div css={itemCssFooter} key={i}>
-                      {element.title}
+                      {element.value.name}
                     </div>
                   );
                 })}

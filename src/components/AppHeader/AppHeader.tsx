@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
+import type { AppContext, AppProps } from 'next/app';
 import {
-  imgCss,
   menuContainer,
   menuItemCss,
   menuItemContainer,
   submenuContainer,
-  searchItemCss,
 } from "./AppHeaderCss";
 import Image from "next/image";
 import { DynamicObject } from "@/utils/commonUtils/commonTypes";
@@ -13,15 +12,21 @@ import AppHeaderSubmenu from "./AppHeaderSubmenu";
 import GlobalHeader from "../GlobalHeader/GlobalHeader";
 import MobileSidebar from "./MobileSidebar/MobileSidebar";
 import Search from "../SearchBox/SearchBox";
-type Props = {};
+import { get } from "@/utils/api/apiMethods";
+type Props = {
+};
 
-export default function AppHeader({}: Props) {
+export default function AppHeader(props: any) {
   const [menuArray, setMenuArray] = useState([]);
   const [mobileMenuArray, setMobileMenuArray] = useState([]);
   const [selectedMenu, setSelectedMenu] = useState<any>({});
   const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [globalCompanyData, setGlobalCompanyData] = useState([]);
+  // const [footerMenuData, setFooterMenuData ] = useState([]);
 
   useEffect(() => {
+    callMenuApi();
+    // console.log("menuData", props?.menuData)
     if (window && window.innerWidth) {
       console.log("coming ",window.innerHeight, window.innerWidth);
       setWindowWidth(window.innerWidth);
@@ -36,25 +41,41 @@ export default function AppHeader({}: Props) {
       });
   }, []);
 
-  useEffect(() => {
-    const menuOptions: any = [];
-    const menuMobileOptions: any = [];
-    menu.forEach((item: DynamicObject, i) => {
-      item.isSelected = false;
-      if (i === 3) {
-        menuOptions.push({ mainMenu: "Image" });
-        menuOptions.push(item);
-      } else {
-        menuOptions.push(item);
-      }
-    });
-    menu.forEach((item: DynamicObject, i) => {
-      item.isSelected = false;
-      menuMobileOptions.push(item);
-    });
-    setMenuArray(menuOptions);
-    setMobileMenuArray(menuMobileOptions);
-  }, []);
+  const callMenuApi = async () => {
+    const response = await get({url: "http://localhost:8000/menu/headerApi/"});
+    if (response && response?.headerMenu?.length) {
+      const data = response.headerMenu
+      data.map((item:any) => {
+        item.menu_items = JSON.parse(item.menu_items)
+      })
+      console.log("data", data)
+      const menuOptions: any = [];
+      const menuMobileOptions: any = [];
+      data.forEach((item: DynamicObject, i: number) => {
+        item.isSelected = false;
+        if (i === 3) {
+          menuOptions.push({ title: "Image" });
+          menuOptions.push(item);
+        } else {
+          menuOptions.push(item);
+        }
+      });
+      data.forEach((item: DynamicObject, i: number) => {
+        item.isSelected = false;
+        menuMobileOptions.push(item);
+      });
+      setMenuArray(menuOptions);
+      setMobileMenuArray(menuMobileOptions);
+    }
+
+    if (response?.globalCompany?.length) {
+      setGlobalCompanyData(response.globalCompany)
+    }
+
+    if (response?.footerMenu?.length) {
+      props.setFooterMenu(response.footerMenu)
+    }
+  }
 
   const handleClick = (index: number) => {
     const menus = [...menuArray];
@@ -79,7 +100,6 @@ export default function AppHeader({}: Props) {
         item.isSelected = !item.isSelected;
       }
     });
-
     setMobileMenuArray(menusMobile);
   }
 
@@ -89,14 +109,14 @@ export default function AppHeader({}: Props) {
         <MobileSidebar mobileMenuArray={mobileMenuArray} handleClick={handleClickMobile}/>
       ) : (
         <>
-          <GlobalHeader />
+          <GlobalHeader globalCompanyData={globalCompanyData}/>
           <div css={menuContainer(windowWidth)}>
             <div css={menuItemContainer}>
               {menuArray.length
                 ? menuArray.map((item: DynamicObject, index: number) => {
                     return (
                       <>
-                        {item.mainMenu === "Image" ? (
+                        {item.title === "Image" ? (
                           <div>
                             <Image
                               src="https://www.kohler.com.vn/binaries/content/gallery/kohler/home/kohler-logo-261x146.png"
@@ -110,7 +130,7 @@ export default function AppHeader({}: Props) {
                             onClick={() => handleClick(index)}
                             css={menuItemCss}
                           >
-                            {item.mainMenu}
+                            {item.title}
                           </div>
                         )}
                       </>
@@ -130,6 +150,11 @@ export default function AppHeader({}: Props) {
     </>
   );
 }
+
+
+// AppHeader.getInitialProps = async (appContext: AppContext) => {
+//   console.log("Coming");
+// }
 
 const menu = [
   {

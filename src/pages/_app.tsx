@@ -2,7 +2,7 @@ import { AppActions, AppState } from "@/store/interface";
 import { Provider, useCreateStore } from "@/store/store";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AppHeader from "@/components/AppHeader/AppHeader";
 import Footer from "@/components/Footer/Footer";
 
@@ -17,6 +17,7 @@ export default function MyApp({
 }: TProps) {
   const appStore = useCreateStore(initialServerSideState);
   const { categoryData, setCategoryData } = appStore().getState();
+  const [footerMenu, setFooterMenu ] = useState([]);
 
   useEffect(() => {
     callGetApi();
@@ -26,9 +27,9 @@ export default function MyApp({
   };
   return (
     <Provider createStore={appStore}>
-      <AppHeader />
+      <AppHeader setFooterMenu={setFooterMenu}/>
       <Component {...pageProps} />
-      <Footer />
+      <Footer footerMenu={footerMenu}/>
     </Provider>
   );
 }

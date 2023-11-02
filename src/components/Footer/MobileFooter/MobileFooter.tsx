@@ -21,16 +21,16 @@ export default function MobileFooter({ data, handleClick }: Props) {
                   onClick={() => handleClick(index)}
                   key={index}
                 >
-                  <div css={mobileFooter_menuitem}>{item.title}</div>
+                  <div css={mobileFooter_menuitem}>{item.name}</div>
                   <div css={mobileFooter_gt}>&gt;</div>
                 </div>
                 {item.isSelected ? (
                   <>
-                    {item?.menus?.length &&
-                      item.menus.map((item: DynamicObject, i: number) => {
+                    {item?.menuItems?.length &&
+                      JSON.parse(item.menuItems).map((item: DynamicObject, i: number) => {
                         return (
                           <div css={mobilesubmenu_containerFooter} key={i}>
-                            <div css={mobilesubmenu_itemsFooter}>{item.title}</div>
+                            <div css={mobilesubmenu_itemsFooter}>{item.value.name}</div>
                           </div>
                         );
                       })}

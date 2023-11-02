@@ -18,9 +18,11 @@ import { icons } from "@/assets/images";
 import Image from "next/image";
 import { GlobalSubMenu } from "./GlobalSubMenu";
 
-type Props = {};
+type Props = {
+  globalCompanyData: any
+};
 
-export default function GlobalHeader({}: Props) {
+export default function GlobalHeader({globalCompanyData}: Props) {
   const router = useRouter();
   const [isDropDownClicked, setIsDropDownClicked] = useState(false);
 
@@ -68,7 +70,7 @@ export default function GlobalHeader({}: Props) {
       </GlobalHeaderContainer>
       {isDropDownClicked ? (
        <>
-       <GlobalSubMenu imageData={imageData} data={data} isDropDown={isDropDownClicked}/>
+       <GlobalSubMenu imageData={imageData} data={globalCompanyData} isDropDown={isDropDownClicked}/>
        </>
       ): null}
     </>

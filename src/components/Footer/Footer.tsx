@@ -4,17 +4,15 @@ import MobileFooter from './MobileFooter/MobileFooter';
 import DesktopFooter from './DesktopFooter/DesktopFooter';
 import { DynamicObject } from '@/utils/commonUtils/commonTypes';
 
-type Props = {}
+type Props = {
+  footerMenu: any
+}
 
-export default function Footer({}: Props) {
+export default function Footer({footerMenu}: Props) {
   const [windowWidth, setWindowWidth] = useState<number>(0);
   const [ menuData, setMenuData ] = useState<any>();
 
   useEffect(() => {
-    FooterData.map((item: DynamicObject) => {
-      item.isSelected = false;
-    })
-    setMenuData(FooterData);
     if (window && window.innerWidth) {
       console.log("coming ",window.innerHeight, window.innerWidth);
       setWindowWidth(window.innerWidth);
@@ -24,6 +22,14 @@ export default function Footer({}: Props) {
         setWindowWidth(window.innerWidth);
       });
   }, []);
+
+  useEffect(() => {
+    const footerData = [...footerMenu]
+    footerData.map((item: DynamicObject) => {
+      item.isSelected = false;
+    })
+    setMenuData(footerData);
+  }, [footerMenu])
 
 
   const handleClick = (index: number) => {

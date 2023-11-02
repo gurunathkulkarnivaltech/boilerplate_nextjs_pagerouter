@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from "@emotion/styled";
 
 type Props = {}
@@ -9,14 +9,17 @@ const OrderedList = styled('ol')`
     list-style-type: numeric;
     margin-bottom: 20px;
  `;
+
 const UnorderedList = styled('ul')`
     font-size: 20px;
     margin-left: 100px;
     list-style-type: circle;
  `;
+
 const ListItem = styled('li')`
     font-size: 18px;
  `;
+ 
 const Heading = styled.div`
     font-size: 20px;
     font-weight: bold;

@@ -29,7 +29,7 @@ export default function Silder({ bannerData }: Props) {
           return (
             <div key={index} >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img css={imageSilderCss} src={item.imageUrl} alt="image" />
+              <img css={imageSilderCss} src={item.value.photo.file} alt="image" />
             </div>
           );
         })}

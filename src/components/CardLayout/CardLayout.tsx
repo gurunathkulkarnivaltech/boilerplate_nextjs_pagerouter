@@ -62,9 +62,9 @@ const CardLayout = ({ data, title }: Props) => {
           {data.map((item: any, index: number) => {
             return (
               <div key={index} css={gridItem}>
-                <img src={item.img} css={imageCardCss} />
-                <div css={titleCss}>{item.title}</div>
-                <div css={descriptionCss}>{item.description}</div>
+                <img src={item.value.photo.file} css={imageCardCss} />
+                <div css={titleCss}>{item.value.card_title}</div>
+                <div css={descriptionCss}>{item.value.card_description}</div>
               </div>
             );
           })}
