@@ -1,5 +1,5 @@
-export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "";
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000";
 
 // example for URL
 
-export const MANTRA_GET_API = `${BASE_URL}/category`;
+export const PAGE_API_URL = `${BASE_URL}/api/v2/pages`;

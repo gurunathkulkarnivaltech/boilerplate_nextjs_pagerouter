@@ -1,18 +1,11 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
-import styles from "src/styles/Home.module.css";
-import ContentPage from "@/components/ContentPage";
-import axios from "axios";
-import { BrPage } from "@bloomreach/react-sdk";
-import GlobalHeader from "@/components/GlobalHeader/GlobalHeader";
 import Silder from "@/components/Silder/Silder";
-import AppHeader from "@/components/AppHeader/AppHeader";
 import CardLayout from "@/components/CardLayout/CardLayout";
 import { get } from "@/utils/api/apiMethods";
 
 export default function Home() {
-  const [homePageData, setHomePageData] = useState({});
   const [bannerData, setBannerData  ] = useState([]);
   const [cardData, setCardData] = useState([])
   
@@ -47,81 +40,3 @@ export default function Home() {
     </>
   );
 }
-
-// const data = [
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products. ",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-//   {
-//     img: "https://s7d4.scene7.com/is/image/kohlerchina/2022%20most%20innovative%20bathroom%20products%20%E2%80%93Moxie%20Numi%20GCS_Secondary%20banner%20290%20x%20232",
-//     title: "Innovative Bathroom Products for 2022",
-//     description:
-//       "Turn your bathroom into a home spa with cutting-edge products.",
-//   },
-// ];
-
-// const bannerData = [
-//   {
-//     imageUrl:
-//       "https://s7d4.scene7.com/is/image/kohlerchina/Banner-Matterport-Uploading-01?wid=1905",
-//   },
-//   {
-//     imageUrl:
-//       "https://s7d4.scene7.com/is/image/kohlerchina/Poseidon-WebBanner-1905x640-VN-Update?wid=1905",
-//   },
-//   {
-//     imageUrl:
-//       "https://s7d4.scene7.com/is/image/kohlerchina/Banner-Matterport-Uploading-01?wid=1905",
-//   },
-// ];

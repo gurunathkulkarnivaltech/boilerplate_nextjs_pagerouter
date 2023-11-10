@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 's7d4.scene7.com',
         port: ''
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost:8000',
+        port: ''
+      },
     ],
   },
 };
