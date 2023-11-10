@@ -1,10 +1,34 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import type { AppContext, AppProps } from 'next/app';
 import styles from "src/styles/Home.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
+import Link from "next/link";
 
-export default function Home() {
+export async function getServerSideProps(appContext: any) {
+  console.log("data", appContext)
+  // const requestHeaders = appContext.ctx?.req;
+  const {locale} = appContext;
+  console.log("locale", locale)
+  let greeting = "";
+  if (locale === "en-US") {
+    greeting = "Hello I am en";
+  } else if (locale === "de") {
+    greeting = "Hello I am de";
+  } else if (locale === "fr") {
+    greeting = "Hello i am fr";
+  }
+
+  return {
+    props: {
+      greeting
+    },
+  };
+
+}
+
+export default function Home(props: any) {
   return (
     <>
       <Head>
@@ -14,7 +38,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        hiii
+        <div style={{display:"flex", flexDirection: "column"}}>
+   
+        {props.greeting}
+        <br />
+        <br />
+        <br />
+        <Link href="/" locale="fr">
+          To FR
+        </Link>
+        <Link href="/" locale="de">
+          To DE
+        </Link>
+        <Link href="/" locale="en-Us">
+          To EN
+        </Link>
+        </div>
+     
       </main>
     </>
   );
